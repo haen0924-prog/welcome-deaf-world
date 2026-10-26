@@ -204,7 +204,7 @@
   }
   .card.split { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
   .card.split.reverse .img-box { order: -1; }
-  .card .img-box { margin: 0; }
+  .card .img-box { margin: 0; align-self: start; }
   .card h3 { font-size: 30px; font-weight: 900; line-height: 1.25; margin: 0 0 8px; letter-spacing: -0.02em; }
   .card .sub { font-weight: 700; font-size: 17px; color: var(--blue); margin: 0 0 14px; }
   .card p { margin: 0 0 12px; }
@@ -235,9 +235,9 @@
     background: var(--soft);
     border-radius: 22px;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
+    min-height: 220px;
   }
-  .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .img-box img { width: 100%; height: auto; display: block; }
   .img-box.wide { aspect-ratio: 16 / 9; }
   .img-box.tall { aspect-ratio: 3 / 4; }
   .img-box .ph {
@@ -279,6 +279,26 @@
   .timeline .date { font-weight: 900; font-size: 22px; color: var(--red); }
   .timeline .title { font-weight: 900; font-size: 22px; margin-bottom: 6px; }
   .timeline .desc { margin: 0; color: var(--muted); }
+  /* ================= 일정표 ================= */
+  .sched { margin: 0 0 48px; }
+  .sched-title { font-size: 30px; font-weight: 900; margin: 0 0 22px; letter-spacing: -0.02em; }
+  .sched .day { background: #fff; border: 2.5px solid var(--ink); border-radius: 24px; padding: 22px 26px; margin-bottom: 24px; }
+  .sched .day-h { font-weight: 900; font-size: 22px; margin-bottom: 8px; }
+  .sched .srow { display: grid; grid-template-columns: 110px 1.7fr 1fr 80px 1.2fr; gap: 12px; align-items: center; padding: 12px 0; border-top: 1.5px dashed #d9d4c7; font-size: 15px; line-height: 1.5; }
+  .sched .srow.head { font-weight: 900; font-size: 13px; color: var(--muted); border-top: none; padding-top: 4px; }
+  .sched .pname { font-weight: 900; }
+  .sched .tag { display: inline-block; border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 900; color: #fff; white-space: nowrap; }
+  .sched .tag.e { background: #2aa7b8; }
+  .sched .tag.b { background: #f5b82e; color: #222; }
+  .sched .tag.w { background: #e4572e; }
+  .sched .tag.f { background: #3f9d5b; }
+  .sched .tag.o { background: #8e5cd9; }
+  .sched .tag.p, .sched .tag.s { background: #2f6fd6; }
+  @media (max-width: 760px) {
+    .sched .day { padding: 18px 16px; }
+    .sched .srow { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+    .sched .srow.head { display: none; }
+  }
   .poster-wrap { max-width: 520px; margin: 0 auto 48px; }
   .poster-wrap .img-box { border-radius: 8px; aspect-ratio: 1178 / 1600; }
 
@@ -333,6 +353,18 @@
     .hotspot { font-size: 13px; padding: 7px 12px; }
     .deco { display: none; }
   }
+  /* ================= 맨 위로 버튼 ================= */
+  .to-top {
+    position: fixed; right: 20px; bottom: 20px; z-index: 50;
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--yellow); color: var(--ink);
+    font-weight: 900; font-size: 13px; cursor: pointer;
+    box-shadow: 0 4px 0 var(--ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1;
+  }
+  .to-top:hover { transform: translateY(-2px); }
+  .to-top:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+  .to-top .arrow { font-size: 18px; }
 </style>
 </head>
 <body data-lang="ko">
@@ -575,7 +607,7 @@
           <div class="meta l-en">Time: 10:30, 13:30 · Venue: Modu Art Theater Practice Room 1</div>
           
         </div>
-        <div class="img-box tall">
+        <div class="img-box">
           <img src="images/ws-1-coda.jpg" alt="조미혜 강사" onerror="this.style.display='none'">
           <div class="ph">images/ws-1-coda.jpg</div>
         </div>
@@ -600,7 +632,7 @@
           <div class="meta l-en">Time: 14:30, 15:30 · Venue: Modu Art Theater Practice Room 1</div>
           
         </div>
-        <div class="img-box tall">
+        <div class="img-box">
           <img src="images/ws-2-devia.jpg" alt="변강석 강사" onerror="this.style.display='none'">
           <div class="ph">images/ws-2-devia.jpg</div>
         </div>
@@ -623,7 +655,7 @@
           <div class="meta l-en">Time: 11:30, 14:30 · Venue: Modu Art Theater Practice Room 2</div>
           
         </div>
-        <div class="img-box tall">
+        <div class="img-box">
           <img src="images/ws-3-relay-dance.jpg" alt="김지연 강사" onerror="this.style.display='none'">
           <div class="ph">images/ws-3-relay-dance.jpg</div>
         </div>
@@ -646,7 +678,7 @@
           <div class="meta l-en">Time: 10:30, 15:30 · Venue: Modu Art Theater Practice Room 2</div>
           
         </div>
-        <div class="img-box tall">
+        <div class="img-box">
           <img src="images/ws-4-vv.jpg" alt="다비드 우르반치크 강사" onerror="this.style.display='none'">
           <div class="ph">images/ws-4-vv.jpg</div>
         </div>
@@ -669,7 +701,7 @@
           <div class="meta l-en"><strong>Date & Venue</strong><br>Oct 31 (Sat) 11:30 · Practice Room 1<br>Oct 31 (Sat) 13:30 · Practice Room 2</div>
           
         </div>
-        <div class="img-box tall">
+        <div class="img-box">
           <img src="images/ws-5-signwriting.jpg" alt="최지혜 강사" onerror="this.style.display='none'">
           <div class="ph">images/ws-5-signwriting.jpg</div>
         </div>
@@ -694,12 +726,6 @@
     
 
     <div class="booth-photos">
-      <div class="img-box"><img src="images/booth-photo-1.jpg" alt="구움과자" onerror="this.style.display='none'"><div class="ph">images/booth-photo-1.jpg</div></div>
-      <div class="img-box"><img src="images/booth-photo-2.jpg" alt="꽃 체험" onerror="this.style.display='none'"><div class="ph">images/booth-photo-2.jpg</div></div>
-      <div class="img-box"><img src="images/booth-photo-3.jpg" alt="수다람툰 굿즈" onerror="this.style.display='none'"><div class="ph">images/booth-photo-3.jpg</div></div>
-      <div class="img-box"><img src="images/booth-photo-4.jpg" alt="행사장 풍경" onerror="this.style.display='none'"><div class="ph">images/booth-photo-4.jpg</div></div>
-      <div class="img-box"><img src="images/booth-photo-5.jpg" alt="수중하키 체험" onerror="this.style.display='none'"><div class="ph">images/booth-photo-5.jpg</div></div>
-      <div class="img-box"><img src="images/booth-photo-6.jpg" alt="수어로 대화하는 다람가족" onerror="this.style.display='none'"><div class="ph">images/booth-photo-6.jpg</div></div>
     </div>
 
     <div class="booth-grid">
@@ -961,10 +987,85 @@
       
     </ul>
 
-    <div class="img-box wide" style="margin-bottom:40px;">
-      <img src="images/camp-program.jpg" alt="다채로운 장애예술 프로그램 사진" onerror="this.style.display='none'">
-      <div class="ph">images/camp-program.jpg</div>
-    </div>
+<div class="sched l-ko">
+  <h3 class="sched-title">전체 프로그램 일정표</h3>
+  <div class="day">
+    <div class="day-h">10. 31.(토)</div>
+    <div class="srow head"><span>구분</span><span>프로그램명</span><span>시간</span><span>진행시간</span><span>장소</span></div>
+    <div class="srow"><span><span class="tag e">전시</span></span><span class="pname">&lt;한 공간, 시선의 온도&gt;, &lt;수어문학 전시&gt;, &lt;수어문자 전시 및 해설&gt;</span><span class="ptime">10:00~17:30</span><span class="pdur">종일</span><span class="pplace">모두스튜디오 (3층)</span></div>
+    <div class="srow"><span><span class="tag b">부스</span></span><span class="pname">체험/판매</span><span class="ptime">10:00~17:30</span><span class="pdur">종일</span><span class="pplace">모두라운지 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">코다 사용설명서</span><span class="ptime">10:30~11:20<br>13:30~14:20</span><span class="pdur">50분</span><span class="pplace">연습실 1 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">VV 워크숍</span><span class="ptime">10:30~11:20<br>15:30~16:20</span><span class="pdur">50분</span><span class="pplace">연습실 2 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">보이는 언어를 기록하다: 수어문자</span><span class="ptime">11:30~12:20<br>13:30~14:20</span><span class="pdur">50분</span><span class="pplace">연습실 1 (2층), 연습실 2 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">움직임 &amp; 수어 릴레이 댄스 워크숍</span><span class="ptime">11:30~12:20<br>14:30~15:20</span><span class="pdur">50분</span><span class="pplace">연습실 2 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">그림으로 만나는 농인의 시선 -De&#x27;VIA(데비아) 시각예술 체험 워크숍</span><span class="ptime">14:30~15:20<br>15:30~17:20</span><span class="pdur">50분</span><span class="pplace">연습실 1 (2층)</span></div>
+    <div class="srow"><span><span class="tag p">공연</span></span><span class="pname">수어문학</span><span class="ptime">18:00~19:30</span><span class="pdur">90분</span><span class="pplace">공연장 (2층)</span></div>
+    <div class="srow"><span><span class="tag s">슬램</span></span><span class="pname">슬램</span><span class="ptime">19:30~21:00</span><span class="pdur">90분</span><span class="pplace">공연장 (2층)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">11. 6.(금)</div>
+    <div class="srow head"><span>구분</span><span>프로그램명</span><span>시간</span><span>진행시간</span><span>장소</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210분</span><span class="pplace">대연습실 (1층)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">11. 7.(토)</div>
+    <div class="srow head"><span>구분</span><span>프로그램명</span><span>시간</span><span>진행시간</span><span>장소</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">야호야호: 바디밍 &amp; 투게더링</span><span class="ptime">11:00~14:00</span><span class="pdur">180분</span><span class="pplace">공연장, 모두라운지 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210분</span><span class="pplace">대연습실 (1층)</span></div>
+    <div class="srow"><span><span class="tag f">포럼</span></span><span class="pname">예술 양육</span><span class="ptime">14:20~15:30</span><span class="pdur">70분</span><span class="pplace">모두라운지 (2층)</span></div>
+    <div class="srow"><span><span class="tag o">자유발언대</span></span><span class="pname">스탠드 &#x27;역(易)&#x27; 코미디</span><span class="ptime">15:30~16:40</span><span class="pdur">70분</span><span class="pplace">모두스튜디오 (3층)</span></div>
+    <div class="srow"><span><span class="tag p">공연</span></span><span class="pname">모두의 콘서트</span><span class="ptime">17:00~18:30</span><span class="pdur">90분</span><span class="pplace">공연장 (2층)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">11. 8.(일)</div>
+    <div class="srow head"><span>구분</span><span>프로그램명</span><span>시간</span><span>진행시간</span><span>장소</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">야호야호: 바디밍 &amp; 투게더링</span><span class="ptime">11:00~14:00</span><span class="pdur">180분</span><span class="pplace">공연장, 모두라운지 (2층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210분</span><span class="pplace">대연습실 (1층)</span></div>
+    <div class="srow"><span><span class="tag w">워크숍</span></span><span class="pname">넋넋한 예술</span><span class="ptime">14:00~14:40<br>15:00~15:40</span><span class="pdur">40분</span><span class="pplace">연습실 1 (2층)</span></div>
+    <div class="srow"><span><span class="tag p">공연</span></span><span class="pname">짜잔쨈, 모두예술극장</span><span class="ptime">16:00~17:10</span><span class="pdur">70분</span><span class="pplace">모두라운지 (2층)</span></div>
+    <div class="srow"><span><span class="tag o">자유발언대</span></span><span class="pname">스탠드 &#x27;역(易)&#x27; 코미디</span><span class="ptime">17:30~18:40</span><span class="pdur">70분</span><span class="pplace">모두스튜디오 (3층)</span></div>
+  </div>
+</div>
+<div class="sched l-en">
+  <h3 class="sched-title">Full Program Schedule</h3>
+  <div class="day">
+    <div class="day-h">Oct 31 (Sat)</div>
+    <div class="srow head"><span>Type</span><span>Program</span><span>Time</span><span>Duration</span><span>Venue</span></div>
+    <div class="srow"><span><span class="tag e">Exhibition</span></span><span class="pname">&lt;한 공간, 시선의 온도&gt;, &lt;수어문학 전시&gt;, &lt;수어문자 전시 및 해설&gt;</span><span class="ptime">10:00~17:30</span><span class="pdur">All day</span><span class="pplace">Modu Studio (3F)</span></div>
+    <div class="srow"><span><span class="tag b">Booth</span></span><span class="pname">체험/판매</span><span class="ptime">10:00~17:30</span><span class="pdur">All day</span><span class="pplace">Modu Lounge (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">코다 사용설명서</span><span class="ptime">10:30~11:20<br>13:30~14:20</span><span class="pdur">50 min</span><span class="pplace">Studio 1 (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">VV 워크숍</span><span class="ptime">10:30~11:20<br>15:30~16:20</span><span class="pdur">50 min</span><span class="pplace">Studio 2 (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">보이는 언어를 기록하다: 수어문자</span><span class="ptime">11:30~12:20<br>13:30~14:20</span><span class="pdur">50 min</span><span class="pplace">Studio 1 (2F), Studio 2 (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">움직임 &amp; 수어 릴레이 댄스 워크숍</span><span class="ptime">11:30~12:20<br>14:30~15:20</span><span class="pdur">50 min</span><span class="pplace">Studio 2 (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">그림으로 만나는 농인의 시선 -De&#x27;VIA(데비아) 시각예술 체험 워크숍</span><span class="ptime">14:30~15:20<br>15:30~17:20</span><span class="pdur">50 min</span><span class="pplace">Studio 1 (2F)</span></div>
+    <div class="srow"><span><span class="tag p">Performance</span></span><span class="pname">수어문학</span><span class="ptime">18:00~19:30</span><span class="pdur">90 min</span><span class="pplace">Auditorium (2F)</span></div>
+    <div class="srow"><span><span class="tag s">Slam</span></span><span class="pname">슬램</span><span class="ptime">19:30~21:00</span><span class="pdur">90 min</span><span class="pplace">Auditorium (2F)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">Nov 6 (Fri)</div>
+    <div class="srow head"><span>Type</span><span>Program</span><span>Time</span><span>Duration</span><span>Venue</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210 min</span><span class="pplace">Large Studio (1F)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">Nov 7 (Sat)</div>
+    <div class="srow head"><span>Type</span><span>Program</span><span>Time</span><span>Duration</span><span>Venue</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">야호야호: 바디밍 &amp; 투게더링</span><span class="ptime">11:00~14:00</span><span class="pdur">180 min</span><span class="pplace">Auditorium, Modu Lounge (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210 min</span><span class="pplace">Large Studio (1F)</span></div>
+    <div class="srow"><span><span class="tag f">Forum</span></span><span class="pname">예술 양육</span><span class="ptime">14:20~15:30</span><span class="pdur">70 min</span><span class="pplace">Modu Lounge (2F)</span></div>
+    <div class="srow"><span><span class="tag o">Open Mic</span></span><span class="pname">스탠드 &#x27;역(易)&#x27; 코미디</span><span class="ptime">15:30~16:40</span><span class="pdur">70 min</span><span class="pplace">Modu Studio (3F)</span></div>
+    <div class="srow"><span><span class="tag p">Performance</span></span><span class="pname">모두의 콘서트</span><span class="ptime">17:00~18:30</span><span class="pdur">90 min</span><span class="pplace">Auditorium (2F)</span></div>
+  </div>
+  <div class="day">
+    <div class="day-h">Nov 8 (Sun)</div>
+    <div class="srow head"><span>Type</span><span>Program</span><span>Time</span><span>Duration</span><span>Venue</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">야호야호: 바디밍 &amp; 투게더링</span><span class="ptime">11:00~14:00</span><span class="pdur">180 min</span><span class="pplace">Auditorium, Modu Lounge (2F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">손끝에서 열리는 시</span><span class="ptime">13:00~16:30</span><span class="pdur">210 min</span><span class="pplace">Large Studio (1F)</span></div>
+    <div class="srow"><span><span class="tag w">Workshop</span></span><span class="pname">넋넋한 예술</span><span class="ptime">14:00~14:40<br>15:00~15:40</span><span class="pdur">40 min</span><span class="pplace">Studio 1 (2F)</span></div>
+    <div class="srow"><span><span class="tag p">Performance</span></span><span class="pname">짜잔쨈, 모두예술극장</span><span class="ptime">16:00~17:10</span><span class="pdur">70 min</span><span class="pplace">Modu Lounge (2F)</span></div>
+    <div class="srow"><span><span class="tag o">Open Mic</span></span><span class="pname">스탠드 &#x27;역(易)&#x27; 코미디</span><span class="ptime">17:30~18:40</span><span class="pdur">70 min</span><span class="pplace">Modu Studio (3F)</span></div>
+  </div>
+</div>
+
 
     <div class="btn-row">
       <a class="btn" href="https://moduarttheater.or.kr" target="_blank" rel="noopener">
@@ -1060,5 +1161,6 @@
   })();
 </script>
 
+<button type="button" class="to-top" aria-label="맨 위로 / Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="arrow">⬆️</span>TOP</button>
 </body>
 </html>
